@@ -27,7 +27,7 @@ loading a shader into OpenGL.
 
 If you don't want to use exceptions compile with -fno-exceptions.
 mapped_file will then call exit(1) if an error occurs.
-MSVC Users: You have to define __EXCEPTIONS if you want exceptions.
+MSVC Users: You have to define MAPPEDFILE_USE_EXCEPTIONS if you want exceptions.
 
 Supported Operating Systems
 ---------------------------
