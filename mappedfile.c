@@ -56,11 +56,14 @@ char *map_file(const char *path, size_t *length)
 	if (hFile == INVALID_HANDLE_VALUE)
 		return NULL;
 
-	size = GetFileSize(hFile, NULL);
-	if (size == INVALID_FILE_SIZE || size == 0)
+	if (!GetFileSizeEx(hFile, &size))
 		goto fail;
 
-	hMap = CreateFileMappingA(hFile, NULL, PAGE_READONLY, 0, size, NULL);
+	if (size == 0)
+		goto fail;
+
+	hMap = CreateFileMappingA(hFile, NULL, PAGE_READONLY, (DWORD) (size >> 32), (DWORD) size, NULL);
+
 	if (!hMap)
 		goto fail;
 
